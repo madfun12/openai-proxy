@@ -119,7 +119,7 @@ router.post("/", async (req, res) => {
         </section>
     </div>
 </div>
-
+<!-- DO NOT CHANGE PAST THIS LINE -->
 <!-- PRODUCTS CATEGORY JS -->
 <script>
     /* FUNCTION TO PULL PRODUCTS FROM CATEGORY */
