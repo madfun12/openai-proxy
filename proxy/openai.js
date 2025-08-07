@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
                     loading="lazy"
                     allowfullscreen
                     referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps?q=/* CITY NAME HERE */&output=embed">
+                    src=${body["map-src"]}>
                 </iframe>
             </div>
         </section>
