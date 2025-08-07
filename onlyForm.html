@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>City Page Request Form</title>
+  </head>
+  <body>
+    <main class="city-page-form">
+      <h1>City Page Request Form</h1>
+      <form>
+        <section class="city-form-section contact-info">
+          <h2>Contact Information</h2>
+          <!-- <div class="hidden">
+            <label>Shop Name</label>
+            <input
+              type="text"
+              value=""
+              name="shop-name"
+              required=""
+              class="border rounded"
+              id="shopNameInput"
+            />
+          </div>
+          <div class="hidden">
+            <label>Teleflora ID</label>
+            <input
+              type="text"
+              value=""
+              name="shop-id"
+              required=""
+              id="telefloraIDInput"
+            />
+          </div> -->
+          <div>
+            <label>Contact Name</label>
+            <input type="text" value="" name="contact-name" required="" />
+          </div>
+          <div>
+            <label>Contact Phone Number</label>
+            <input type="phone" value="" name="contact-phone" required="" />
+          </div>
+          <div>
+            <label>Contact Email</label>
+            <input type="text" value="" name="contact-email" required="" />
+          </div>
+        </section>
+        <section class="city-form-section city-page-info hidden">
+          <div>
+            <h2>City Page Information</h2>
+            <label>City and State</label>
+            <input
+              type="text"
+              value="Oklahoma City, OK"
+              name="city-state"
+              required=""
+            />
+          </div>
+          <div>
+            <p>What delivery options are available in your city?</p>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Same day delivery"
+                name="delivery-options"
+                id="sameDay"
+              />
+              <label for="sameDay">Same Day Delivery</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Next day delivery"
+                name="delivery-options"
+                id="nextDay"
+              />
+              <label for="nextDay">Next Day Delivery</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="I do not deliver here"
+                name="delivery-options"
+                id="noDelivery"
+              />
+              <label for="noDelivery">I do not deliver here</label>
+            </div>
+          </div>
+          <div>
+            <p>Is there any delivery information specific to this city?</p>
+            <input
+              type="text"
+              value=""
+              placeholder=""
+              name="delivery-information"
+            />
+          </div>
+          <div>
+            <p>What special services do you provide to this city?</p>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Gift Basket Delivery"
+                name="city-services"
+                id="giftBaskets"
+              />
+              <label for="giftBaskets">Gift Basket Delivery</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Same Day Plant Delivery"
+                name="city-services"
+                id="plantDelivery"
+              />
+              <label for="plantDelivery">Same Day Plant Delivery</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Wedding Flower Services"
+                name="city-services"
+                id="weddingServices"
+              />
+              <label for="weddingServices">Wedding Flower Services</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="corporate events"
+                name="city-services"
+                id="corpoEvents"
+              />
+              <label for="corpoEvents">Corporate Events</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Funeral Flower Services"
+                name="city-services"
+                id="funeralFlowers"
+              />
+              <label for="funeralFlowers">Funeral Flowers</label>
+            </div>
+            <div class="checkbox-wrapper checkbox-inline">
+              <input
+                type="checkbox"
+                value="Other"
+                name="city-services"
+                id="otherServices"
+              />
+              <label for="otherServices">Other: </label>
+              <input
+                type="text"
+                value=""
+                name="other-city-services"
+                id="otherServicesText"
+                class="hidden"
+              />
+            </div>
+          </div>
+          <div>
+            <label>How long have you been serving this area?</label>
+            <input type="text" value="" name="service-duration" />
+          </div>
+          <div>
+            <label
+              >What tourist attractions, shopping, or historical districts are
+              popular in this city?&lt;/label &gt;
+              <input type="text" value="" name="city-attractions" />
+            </label>
+          </div>
+          <div>
+            <label
+              >What Zip Codes or Neighborhoods are include in this
+              area?&lt;/label &gt;
+              <input type="text" value="" name="city-zips-and-neighborhoods" />
+            </label>
+          </div>
+          <div>
+            <label
+              >Are there any special holidays or events in this area that
+              incorporate flowers?&lt;/label &gt;
+              <input type="text" value="" name="special-holidays" />
+            </label>
+          </div>
+          <div>
+            <label
+              >What's something unique about your service or shop you want
+              people in this area to know?&lt;/label &gt;
+              <input type="text" value="" name="unique" />
+            </label>
+          </div>
+          <div>
+            <label
+              >Is there anything else you would like customers in this city to
+              know?&lt;/label &gt;
+              <input type="text" value="" name="additional-info" />
+            </label>
+          </div>
+          <div>
+            <p>How would you describe your floral style?</p>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Rustic"
+                name="floral-style"
+                id="rustic"
+              />
+              <label for="rustic">Rustic</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Classic"
+                name="floral-style"
+                id="classic"
+              />
+              <label for="classic">Classic</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Value"
+                name="floral-style"
+                id="value"
+              />
+              <label for="value">Value</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Luxury"
+                name="floral-style"
+                id="luxury"
+              />
+              <label for="luxury">Luxury</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="Bohemian"
+                name="floral-style"
+                id="bohemian"
+              />
+              <label for="bohemian">Bohemian</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="modern/sleek"
+                name="floral-style"
+                id="modern"
+              />
+              <label for="modern">Modern / Sleek</label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                value="minimalist"
+                name="floral-style"
+                id="minimalist"
+              />
+              <label for="minimalist">Minimalist</label>
+            </div>
+          </div>
+          <div>
+            <label>Funeral Homes You Deliver to in this city (list 2-3)</label>
+            <input type="text" value="" name="funeral-homes" />
+          </div>
+          <div>
+            <label>Hospitals You Deliver to in this city (list 2-3)</label>
+            <input type="text" value="" name="hospitals" />
+          </div>
+          <div>
+            <label>Schools You Deliver to in this city (list 2-3)</label>
+            <input type="text" value="" name="schools" />
+          </div>
+          <div>
+            <label>Wedding Venues You Deliver to in this city (list 2-3)</label>
+            <input type="text" value="" name="wedding-venues" />
+          </div>
+          <div>
+            <label
+              >Other Locations You Deliver to in this city (list 2-3)</label
+            >
+            <input type="text" value="" name="other-locations" />
+          </div>
+        </section>
+        <div class="city-form-buttons">
+          <button type="button" class="back-button">Back</button>
+          <button class="next-button">Next</button>
+        </div>
+      </form>
+      <script>
+        const cityPageForm = document.querySelector("form");
+        const nextButton = document.querySelector(".next-button");
+        const otherCheck = document.getElementById("otherServices");
+        const formSections = document.querySelectorAll(".city-form-section");
+        console.log("Form sections length: ", formSections.length);
+        let index = 0;
+
+        otherCheck.addEventListener("click", () => {
+          const otherTextInput = document.getElementById("otherServicesText");
+
+          otherTextInput.classList.toggle("hidden");
+        });
+
+        cityPageForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Submit form on last step
+          if (index === formSections.length - 1) {
+            const idAndTitle = document.getElementById("shop-name-title");
+            const [telefloraId, shopName] = idAndTitle.textContent.split("-");
+            const formData = new FormData(cityPageForm);
+            const data = {};
+
+            for (const [key, value] of formData.entries()) {
+              if (data[key]) {
+                if (!Array.isArray(data[key])) {
+                  data[key] = [data[key]];
+                }
+                data[key].push(value);
+              } else {
+                data[key] = value;
+              }
+            }
+
+            try {
+              nextButton.textContent = "Loading...";
+              const res = await fetch("http://localhost:3000/proxy/openai", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  "shop-name": shopName,
+                  ...data,
+                }),
+              });
+
+              const result = await res.json();
+              console.log(result);
+              const pageSlug =
+                "/" +
+                data["city-state"].toLowerCase().replace(/[^a-z0-9]+/g, "-");
+              const response = await fetch(
+                "/rest/model/teleflora/esat/contentmanagement/CustomPageActor/saveOrUpdateCustomPage",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  credentials: "include",
+                  body: JSON.stringify({
+                    customPageInfo: {
+                      pageName: "Test Page 123",
+                      pageUrl: pageSlug,
+                      active: true,
+                      metaDesc: "",
+                      pageTitle: data["city-state"],
+                      metaKeywords: "",
+                      metaTags: "",
+                      useSiteWrapper: true,
+                      addToSitemap: true,
+                      pageMainContent: result,
+                      startDate: "07/30/2025",
+                      endDate: "",
+                      linkForm: false,
+                      selectedFormId: "",
+                      customFormList: [
+                        {
+                          formId: "40200001",
+                          emailResults: null,
+                          pageMainContent: null,
+                          captcha: false,
+                          endDate: null,
+                          customFormId: null,
+                          formName: "This is a subject test",
+                          active: false,
+                          pageUrl: null,
+                          fields: null,
+                          class:
+                            "com.teleflora.esat.customforms.ui.CustomFormInfo",
+                          startDate: null,
+                        },
+                      ],
+                      class:
+                        "com.teleflora.esat.contentmanagement.ui.CustomPageInfo",
+                    },
+                    clickPageName: "Custom HTML pages",
+                  }),
+                }
+              );
+
+              const eSATResponse = await response.json();
+              nextButton.textContent = "Submit";
+              console.log(eSATResponse);
+              const error =
+                eSATResponse.exception.formExceptions[0].localizedMessage;
+              if (error) {
+                alert(`Failed to create page!: ${error}`);
+                throw new Error(error);
+              }
+              alert(
+                `Successfully created page!: https://${telefloraId}.preview.telefloristonline.com${pageSlug}`
+              );
+            } catch (err) {
+              console.error(err);
+            }
+
+            return;
+          }
+
+          if (index === formSections.length - 2) {
+            nextButton.textContent = "Submit";
+          }
+
+          formSections[index].classList.toggle("hidden");
+          index++;
+          formSections[index].classList.toggle("hidden");
+        });
+      </script>
+    </main>
+    <style>
+      .city-page-form * {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+      }
+      .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .city-page-form form {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15);
+      }
+
+      form input[type="phone"] {
+        border: 1px solid #bcbcbc;
+        border-radius: 3px;
+        font-size: 12px;
+        height: 3em;
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+      }
+      form p {
+        font-size: 1.1em;
+        font-weight: 700;
+      }
+
+      .city-form-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .city-form-buttons button {
+        padding: 7px 20px;
+        border-radius: 7px;
+        font-size: 1.2em;
+        border: 2px solid black;
+        background-color: white;
+        box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15);
+      }
+      .city-form-buttons .next-button {
+        background-color: black;
+        color: #fff;
+      }
+    </style>
+  </body>
+</html>

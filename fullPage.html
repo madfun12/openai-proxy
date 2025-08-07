@@ -1,0 +1,3022 @@
+<html class="mac">
+  <!-- <html> --><head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>eSAT</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//assets.eflorist.com/esat/css/bundle.css?v=20250528210309"
+    />
+    <script
+      type="text/javascript"
+      async=""
+      src="https://www.google-analytics.com/analytics.js"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://www.googletagmanager.com/gtag/js?id=G-3909M0MP0Y&amp;cx=c&amp;gtm=45He57u1v812968495za200&amp;tag_exp=101509157~102015666~103116026~103200004~103233427~104684208~104684211~105087538~105087540~105103161~105103163"
+    ></script>
+    <script
+      async=""
+      src="https://www.googletagmanager.com/gtm.js?id=GTM-NLXNWVG"
+    ></script>
+    <script src="//assets.eflorist.com//esat/js/vendor/jquery.js?v=20200913122347"></script>
+    <script>
+      var esatImageURL = "//assets.eflorist.com//esat";
+      if (
+        sessionStorage.getItem("behaviourFlags") === null &&
+        localStorage.getItem("behaviourFlags") === null
+      ) {
+        $.ajax({
+          type: "GET",
+          async: false,
+          url: "/public/v1/env/configurations",
+          dataType: "json",
+          success: function (data) {
+            if (data.behaviourFlags) {
+              sessionStorage.setItem(
+                "behaviourFlags",
+                JSON.stringify(data.behaviourFlags)
+              );
+              localStorage.setItem(
+                "behaviourFlags",
+                JSON.stringify(data.behaviourFlags)
+              );
+            }
+          },
+        });
+      } else if (
+        sessionStorage.getItem("behaviourFlags") === null &&
+        localStorage.getItem("behaviourFlags") != null
+      ) {
+        sessionStorage.setItem(
+          "behaviourFlags",
+          localStorage.getItem("behaviourFlags")
+        );
+      }
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(
+        window,
+        document,
+        "script",
+        "dataLayer",
+        sessionStorage.getItem("behaviourFlags") === null
+          ? "GTM-NLXNWVG"
+          : JSON.parse(sessionStorage.getItem("behaviourFlags"))[
+              "esat.gtm.code"
+            ]
+      );
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Build the maps.googleapis.com script tag by fetching the googleMapApiKey from sessionStorage. -->
+    <script>
+      var gmApiScript = document.createElement("script");
+      gmApiScript.setAttribute(
+        "src",
+        "https://maps.googleapis.com/maps/api/js?v=3.exp&language=en&key=" +
+          sessionStorage.getItem("googleMapApiKey")
+      );
+      document.head.appendChild(gmApiScript);
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;language=en&amp;key=AIzaSyA__HEZC9XzufP-yrq5FVVOv32-WC7Fwpk"></script>
+    <!-- Google charts script-->
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <!-- End Google charts -->
+    <script src="tinymce/tinymce.min.js "></script>
+    <script src="//assets.eflorist.com//esat/js/bundle.js?v=20250528210309"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        document
+          .getElementById("header-container")
+          .setAttribute("data-tfid", localStorage.getItem("tfId"));
+        //If Session Storage doesnt hold the behaviour flags, then assign the same from local storage.
+        document
+          .getElementById("header-container")
+          .setAttribute("data-tfid", localStorage.getItem("tfId"));
+        if (
+          !sessionStorage.hasOwnProperty("behaviourFlags") &&
+          localStorage.hasOwnProperty("behaviourFlags")
+        ) {
+          sessionStorage.setItem(
+            "behaviourFlags",
+            localStorage.getItem("behaviourFlags")
+          );
+        }
+        if (
+          !sessionStorage.hasOwnProperty("brandLabel") &&
+          localStorage.hasOwnProperty("brandLabel")
+        ) {
+          sessionStorage.setItem(
+            "brandLabel",
+            localStorage.getItem("brandLabel")
+          );
+        }
+        if (
+          !sessionStorage.hasOwnProperty("federatedInfoToolTip") &&
+          localStorage.hasOwnProperty("federatedInfoToolTip")
+        ) {
+          sessionStorage.setItem(
+            "federatedInfoToolTip",
+            localStorage.getItem("federatedInfoToolTip")
+          );
+        }
+
+        $(document).attr(
+          "title",
+          JSON.parse(sessionStorage.getItem("behaviourFlags"))[
+            "esat.ui.common.title"
+          ]
+        );
+
+        var brandLabel = JSON.parse(sessionStorage.getItem("behaviourFlags"))[
+          "common.ui.brand.label"
+        ];
+        var brandImage = JSON.parse(sessionStorage.getItem("behaviourFlags"))[
+          "common.ui.brand.image"
+        ];
+        if (brandLabel === undefined || brandLabel === "") {
+          brandLabel = "Teleflora";
+        }
+        document.getElementById("brandImage").src = brandImage;
+        if (brandImage.indexOf("Interflora") >= 0) {
+          $("#brandImage").addClass("esat-footer-logo-ibu");
+        } else if (brandImage.indexOf("Petals") >= 0) {
+          $("#content").addClass("content-petals");
+          $("#brandImage").addClass("esat-footer-logo-petals");
+        }
+
+        var supportPhoneNumber = JSON.parse(
+          sessionStorage.getItem("behaviourFlags")
+        )["common.ui.brand.supportPhoneNumber"];
+        var supportEmail = JSON.parse(sessionStorage.getItem("behaviourFlags"))[
+          "common.ui.brand.supportEmail"
+        ];
+        if (supportPhoneNumber != undefined && supportPhoneNumber != "") {
+          document.getElementById("supportPhoneNumber").textContent =
+            supportPhoneNumber;
+        }
+        if (supportEmail != undefined && supportEmail != "") {
+          document.getElementById("supportEmail").textContent = supportEmail;
+        }
+        var esatMenu = JSON.parse(localStorage.getItem("esatMenuContent"));
+        var mobileMenu = "no-desktop";
+        var desktopMenu = "no-mobile";
+        esatMenu.categories.forEach(function (item) {
+          if (item.id === "pos") {
+            mobileMenu = mobileMenu + "-pos";
+            desktopMenu = desktopMenu + "-pos";
+          }
+          if (item.id === "afterhours") {
+            mobileMenu = mobileMenu + "-afterhours";
+            desktopMenu = desktopMenu + "-afterhours";
+          }
+        });
+        localStorage.setItem("mobileMenu", mobileMenu),
+          $("#mobile-nav,#mobile-nav-overlay").addClass(mobileMenu);
+        $("#page").addClass(mobileMenu + "-display");
+        $("#main-nav").addClass("row " + desktopMenu);
+      });
+      function getCategoryName(name) {
+        switch (name) {
+          case "merchandising":
+            title = "merchandising";
+            break;
+          case "content-management":
+            title = "content management";
+            break;
+          case "marketing-promotions":
+            title = "marketing & promotions";
+            break;
+          case "seo":
+            title = "seo";
+            break;
+          case "reporting":
+            title = "reporting";
+            break;
+          case "more":
+            title = "more";
+            break;
+          default:
+            title = "";
+            break;
+        }
+        return title;
+      }
+
+      function getHostName(url) {
+        var match = url.match(/:\/\/(www[0-9]?\.)?(.[^/:]+)/i);
+        if (
+          match != null &&
+          match.length > 2 &&
+          typeof match[2] === "string" &&
+          match[2].length > 0
+        ) {
+          return match[2];
+        } else {
+          return null;
+        }
+      }
+
+      function getDomain(url) {
+        var hostName = getHostName(url);
+        var domain = hostName;
+        if (hostName != null) {
+          var parts = hostName.split(".").reverse();
+          if (parts != null && parts.length > 1) {
+            domain = parts[1] + "." + parts[0];
+            if (
+              hostName.toLowerCase().indexOf(".co.uk") != -1 &&
+              parts.length > 2
+            ) {
+              domain = parts[2] + "." + domain;
+            }
+          }
+        }
+        return domain;
+      }
+
+      function sendOmnitureVars() {
+        user =
+          localStorage.getItem("user") !== undefined &&
+          localStorage.getItem("user") !== ""
+            ? JSON.parse(localStorage.getItem("user"))
+            : "";
+        catName = getCategoryName(
+          localStorage.getItem("hashUrl").split("/")[0]
+        );
+        t_tfid = localStorage.getItem("tfId");
+        t_category = catName.toUpperCase();
+        t_subcategory = "";
+        if (
+          localStorage.getItem("subCategory") !== "undefined" &&
+          localStorage.getItem("subCategory") != ""
+        ) {
+          t_subcategory = localStorage.getItem("subCategory").toUpperCase();
+        }
+        t_lastvisit = "";
+        t_user = user !== null && user !== "" ? user.login : "";
+        t_pageurl = "/#" + localStorage.getItem("hashUrl");
+        t_pagetype = "esat";
+        t_dayofweek = localStorage.getItem("dayofweek");
+        t_typeofday = localStorage.getItem("typeofday");
+        t_page_name = localStorage
+          .getItem("pageTitleText")
+          .replace(/&amp;/g, "&");
+        if ($("#content").find("#home").length > 0) {
+          t_page_name = "Home";
+        }
+        if (t_page_name.split("-")[0].trim() === "Image Management") {
+          t_subcategory = "SITE DESIGN";
+        }
+        t_account = "telefloraesat1";
+        t_ref_dom = "";
+        var currentDomain = getDomain(window.location.href);
+        var refDomain = getDomain(document.referrer);
+        if (currentDomain !== refDomain) {
+          t_ref_dom = document.referrer;
+        }
+        t_server = window.location.host;
+        t_code_url = window.location.href.split("#")[0];
+        /* if (typeof s !== "undefined") {
+    	s.channel = t_pagetype;
+    	s.pagename = t_page_name;
+    	s.evar20 = t_tfid;
+    	s.prop20 = t_tfid;
+    	s.prop1 = t_category;
+    	s.prop3 = t_category;
+    	s.evar4 = t_category;
+    	s.prop2 = t_subcategory;
+    	s.prop8 = t_lastvisit;
+    	s.evar9 = t_user;
+    	s.prop9 = t_user;
+    	s.prop10 = t_pageurl;
+    	s.prop11 = t_pagetype;
+    	s.prop16 = t_page_name;
+    	s_account = t_account;
+    	s.eVar6 = t_ref_dom;
+    	s.server = t_server;
+    	s_code_url = t_code_url;
+    	// Tracking call
+    	s.t();
+    } */
+      }
+    </script>
+    <style>
+      .img-grid-inner {
+        height: 10em;
+      }
+      #product-container #loader-overlay {
+        z-index: 4 !important;
+      }
+      #product-container #spinner-gif {
+        z-index: 4 !important;
+      }
+      @media only screen and (max-width: 960px) .fa-question-circle.icon-large-3x,
+        icon-large-3x.icon-question-circle {
+        font-size: 5em;
+      }
+    </style>
+    <style>
+      .img-grid-inner {
+        height: 10em;
+      }
+      #product-container #loader-overlay {
+        z-index: 4 !important;
+      }
+      #product-container #spinner-gif {
+        z-index: 4 !important;
+      }
+      @media only screen and (max-width: 960px) .fa-question-circle.icon-large-3x,
+        icon-large-3x.icon-question-circle {
+        font-size: 5em;
+      }
+    </style>
+    <style>
+      .img-grid-inner {
+        height: 10em;
+      }
+      #product-container #loader-overlay {
+        z-index: 4 !important;
+      }
+      #product-container #spinner-gif {
+        z-index: 4 !important;
+      }
+      @media only screen and (max-width: 960px) .fa-question-circle.icon-large-3x,
+        icon-large-3x.icon-question-circle {
+        font-size: 5em;
+      }
+    </style>
+    <style type="text/css">
+      .ie-div-position-customer-chat {
+        display: block;
+      }
+      .chat-iframe-wrap {
+        border-radius: 5px 5px 0 0;
+        z-index: 2147483000;
+        position: fixed;
+        bottom: 100px;
+        width: 380px;
+        min-height: 300px;
+        border-radius: 8px;
+        overflow: hidden;
+        opacity: 1;
+        height: calc(100% - 130px);
+        box-shadow: 0 -5px 50px rgba(0, 0, 0, 0.2);
+        left: 24px;
+      }
+      .ie-iframe-fixed-customer-chat {
+        background: transparent;
+        border: none;
+        height: 100%;
+      }
+      .ie-iframe-absolute-customer-chat {
+        background: transparent;
+        border: none;
+        top: 0px;
+        float: none;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+        left: 24px;
+      }
+      .iframe-shadow {
+        border-radius: 5px 5px 0 0;
+        box-shadow: 0 -5px 50px rgba(0, 0, 0, 0.2);
+      }
+      .button-iframe-wrap {
+        bottom: 0px;
+        position: fixed;
+        height: 10%;
+        display: block;
+        z-index: 2147483638;
+      }
+      .ie-chat-button-iframe-fixed-customer-chat {
+        background: transparent;
+        border: none;
+        bottom: 24px;
+        position: fixed;
+        left: 24px;
+        outline: none;
+      }
+      .ie-chat-button-iframe-absolute-customer-chat {
+        background: transparent;
+        border: none;
+        top: 0px;
+        float: none;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+        left: 24px;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      charset="UTF-8"
+      src="https://maps.googleapis.com/maps-api-v3/api/js/61/12c/common.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="UTF-8"
+      src="https://maps.googleapis.com/maps-api-v3/api/js/61/12c/util.js"
+    ></script>
+  </head>
+  <body id="app" style="display: block">
+    <script type="text/javascript" id="" charset="">
+      window.onload = function () {
+        setTimeout(function () {
+          var a = window.location.href.split("/")[4];
+          if ("orders-exceptions" === a) {
+            a = document.querySelector(
+              "#section \x3e div \x3e div.row-spaced.panel \x3e div:nth-child(2)"
+            );
+            var b = document.querySelector(
+              "#section \x3e div \x3e div.row-spaced.panel \x3e div:nth-child(1)"
+            );
+            a.remove();
+            b.remove();
+          }
+        }, 350);
+      };
+      window.addEventListener("popstate", function () {
+        var a = window.location.href.split("/")[4];
+        "orders-exceptions" === a &&
+          setTimeout(function () {
+            var b = document.querySelector(
+                "#section \x3e div \x3e div.row-spaced.panel \x3e div:nth-child(2)"
+              ),
+              c = document.querySelector(
+                "#section \x3e div \x3e div.row-spaced.panel \x3e div:nth-child(1)"
+              );
+            b.remove();
+            c.remove();
+          }, 350);
+      });
+    </script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NLXNWVG"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="page" class="clearfix no-desktop-pos-display">
+      <!-- Container for mobile navigation -->
+      <div id="mobile-nav" class="no-desktop-pos">
+        <div>
+          <ul id="mobile-nav-list" class="compact-list">
+            <li class="mobile-nav-search form-section">
+              <div class="search-container">
+                <input
+                  placeholder="Search"
+                  name="f-nav-search"
+                  id="f-nav-search"
+                  type="text"
+                />
+              </div>
+            </li>
+
+            <li class="link mobile-nav-parent">
+              Merchandising
+              <i class="icon icon-right-chevron pull-right"></i>
+            </li>
+            <ul class="mobile-nav-sub-list">
+              <li class="link main-menu-link">
+                <i class="icon icon-left-chevron x-space-s"></i>Main Menu
+              </li>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-home icon-prefix"></i>Homepage
+              </li>
+
+              <a href="#merchandising/homepage-customization"
+                ><li>Homepage Customization</li></a
+              >
+
+              <a href="#merchandising/homepage-settings"
+                ><li>Homepage Settings</li></a
+              >
+
+              <a href="#merchandising/products-messaging"
+                ><li>Products &amp; Messaging</li></a
+              >
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-site-map icon-prefix"></i>Categories
+              </li>
+
+              <a href="#merchandising/manage-categories"
+                ><li>Category Management</li></a
+              >
+
+              <a href="#merchandising/category-settings"
+                ><li>Category Settings</li></a
+              >
+
+              <a href="#merchandising/collections"><li>Collections</li></a>
+
+              <a href="#merchandising/sympathy-page"><li>Sympathy Page</li></a>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-leaf icon-prefix"></i>Products
+              </li>
+
+              <a href="#merchandising/add-ons"><li>Add-Ons</li></a>
+
+              <a href="#merchandising/deal-of-the-day"
+                ><li>Deal of the Day</li></a
+              >
+
+              <a href="#merchandising/general-product-settings"
+                ><li>General Product Settings</li></a
+              >
+
+              <a href="#merchandising/merchandising-icons"
+                ><li>Merchandising Icons</li></a
+              >
+
+              <a href="#merchandising/product-attributes"
+                ><li>Product Attributes</li></a
+              >
+
+              <a href="eweb/merchandising/product-types"
+                ><li>Product Types</li></a
+              >
+
+              <a href="#merchandising/product-management"
+                ><li>Product Management</li></a
+              >
+
+              <a href="#merchandising/product-page-settings"
+                ><li>Product Page Settings</li></a
+              >
+
+              <a href="#merchandising/subscription-product-setup"
+                ><li>Subscription Products</li></a
+              >
+
+              <a href="#merchandising/third-party-products-catalog"
+                ><li>Third Party Product Catalogs</li></a
+              >
+
+              <div class="tf-mega-menu-items" data-urlhead="#merchandising">
+                <p style="text-align: left">
+                  <span style="font-size: 14pt"
+                    >You can search by Keepsake container.</span
+                  >
+                </p>
+                <p style="text-align: left">
+                  <span style="font-size: 11pt"
+                    >Just turn on the 'Keepsake Container Search' <br />in the
+                    product search filters.&nbsp;&nbsp;</span
+                  >
+                </p>
+                <p>
+                  <script>
+                    // <![CDATA[
+                    $(document).ready(function () {
+                      $("#content").css("paddingTop", "100px");
+                      $("head").append(
+                        "<style>.img-grid-inner{ height: 10em; }#product-container #loader-overlay{z-index:4!important;}#product-container #spinner-gif{z-index:4!important;}@media only screen and (max-width: 960px).fa-question-circle.icon-large-3x, icon-large-3x.icon-question-circle{ font-size: 5em; }</style>"
+                      );
+                    });
+                    // ]]>
+                  </script>
+                </p>
+              </div>
+
+              <li class="mobile-nav-title">&nbsp;</li>
+            </ul>
+
+            <li class="link mobile-nav-parent">
+              Content Management
+              <i class="icon icon-right-chevron pull-right"></i>
+            </li>
+            <ul class="mobile-nav-sub-list">
+              <li class="link main-menu-link">
+                <i class="icon icon-left-chevron x-space-s"></i>Main Menu
+              </li>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-list-ul icon-prefix"></i>Custom Pages
+              </li>
+
+              <a href="#content-management/about-us"><li>About Us</li></a>
+
+              <a href="#content-management/blog"><li>Blog</li></a>
+
+              <a href="#content-management/custom-html-pages"
+                ><li>Custom HTML pages</li></a
+              >
+
+              <a href="#content-management/help"><li>Help Page</li></a>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-grid icon-prefix"></i>Additional Content
+              </li>
+
+              <a href="#content-management/checkout-messaging-management"
+                ><li>Checkout Messaging</li></a
+              >
+
+              <a href="#content-management/custom-forms"
+                ><li>Custom Forms</li></a
+              >
+
+              <a href="#content-management/modal-management"
+                ><li>Modal Management</li></a
+              >
+
+              <a href="#content-management/obituary-list"
+                ><li>Obituary List</li></a
+              >
+
+              <a href="#content-management/social-media-setup"
+                ><li>Social Media Setup</li></a
+              >
+
+              <a href="#content-management/product-outgoing-message"
+                ><li>Outgoing Product Messages</li></a
+              >
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-heart icon-prefix"></i>Wedding Pages
+              </li>
+
+              <a href="#content-management/wedding-flowers"
+                ><li>Flowers Page</li></a
+              >
+
+              <a href="#content-management/wedding-gallery"
+                ><li>Galleries</li></a
+              >
+
+              <a href="#content-management/wedding-page"
+                ><li>Landing Page</li></a
+              >
+
+              <a href="#content-management/wedding-product"
+                ><li>Products Page</li></a
+              >
+
+              <div
+                class="tf-mega-menu-items"
+                data-urlhead="#content-management"
+              ></div>
+
+              <li class="mobile-nav-title">&nbsp;</li>
+            </ul>
+
+            <li class="link mobile-nav-parent">
+              Marketing &amp; Promotions
+              <i class="icon icon-right-chevron pull-right"></i>
+            </li>
+            <ul class="mobile-nav-sub-list">
+              <li class="link main-menu-link">
+                <i class="icon icon-left-chevron x-space-s"></i>Main Menu
+              </li>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-email icon-prefix"></i>Emails
+              </li>
+
+              <a href="#marketing-promotions/email-list-management"
+                ><li>Email List Management</li></a
+              >
+
+              <a href="#marketing-promotions/email-settings"
+                ><li>Email Settings</li></a
+              >
+
+              <a href="#marketing-promotions/manage-marketing-emails"
+                ><li>Marketing Email Management</li></a
+              >
+
+              <a href="#marketing-promotions/custom-email-program"
+                ><li>Custom Email Program</li></a
+              >
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-money icon-prefix"></i>Marketing
+              </li>
+
+              <a href="#marketing-promotions/bonus-bloom-program"
+                ><li>Bonus Bloom Program</li></a
+              >
+
+              <a href="#marketing-promotions/marketing-campaigns"
+                ><li>Marketing Campaigns</li></a
+              >
+
+              <a href="#marketing-promotions/promotion-codes"
+                ><li>Promotion Codes</li></a
+              >
+
+              <a href="#marketing-promotions/review-management"
+                ><li>Review Management</li></a
+              >
+
+              <a href="eweb/marketing-promotions/website-chat-widget"
+                ><li>Website Chat Widget</li></a
+              >
+
+              <a href="#marketing-promotions/manage-rewards"
+                ><li>Rewards Program</li></a
+              >
+
+              <a href="#marketing-promotions/manage-ckey"
+                ><li>Simplified Ordering</li></a
+              >
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-search icon-prefix"></i>Seo
+              </li>
+
+              <a href="#marketing-promotions/about-us"
+                ><li>About Us Page</li></a
+              >
+
+              <a href="#marketing-promotions/footer-management"
+                ><li>Footer Management</li></a
+              >
+
+              <a href="#marketing-promotions/site-map"><li>Site Map</li></a>
+
+              <a href="#marketing-promotions/site-meta-tags"
+                ><li>Site Meta Tags</li></a
+              >
+
+              <a href="#marketing-promotions/social-media-setup"
+                ><li>Social Media Setup</li></a
+              >
+
+              <a href="#marketing-promotions/url-management"
+                ><li>URL Management</li></a
+              >
+
+              <div
+                class="tf-mega-menu-items"
+                data-urlhead="#marketing-promotions"
+              ></div>
+
+              <li class="mobile-nav-title">&nbsp;</li>
+            </ul>
+
+            <li class="link mobile-nav-parent">
+              Reporting
+              <i class="icon icon-right-chevron pull-right"></i>
+            </li>
+            <ul class="mobile-nav-sub-list">
+              <li class="link main-menu-link">
+                <i class="icon icon-left-chevron x-space-s"></i>Main Menu
+              </li>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-bar-chart icon-prefix"></i>Site Performance
+              </li>
+
+              <a href="#reporting/dashboard"><li>Dashboard</li></a>
+
+              <a href="#reporting/find-a-florist"><li>Find A Florist</li></a>
+
+              <a href="#reporting/orders-traffic"
+                ><li>Orders &amp; Traffic</li></a
+              >
+
+              <a href="#reporting/promo-codes"><li>Promotion Codes</li></a>
+
+              <a href="#reporting/source-codes"><li>Source Codes</li></a>
+
+              <a href="#reporting/top-products"><li>Top Products</li></a>
+
+              <a href="#reporting/top-referrals"><li>Top Referrals</li></a>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-line-chart icon-prefix"></i>Other Reports
+              </li>
+
+              <a href="#reporting/email-campaign"><li>Email Campaigns</li></a>
+
+              <a href="#reporting/online-search"
+                ><li>Online Search Marketing</li></a
+              >
+
+              <a href="#reporting/order-lookup"><li>Order Lookup</li></a>
+
+              <a href="#reporting/refunds-lookup"><li>Refunds Lookup</li></a>
+
+              <a href="#reporting/search-optimizer"
+                ><li>Search Optimizer</li></a
+              >
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-analytics icon-prefix"></i>Reporting Admin
+              </li>
+
+              <a href="#reporting/esat-audit-log"><li>eSAT Audit Log</li></a>
+
+              <a href="#reporting/google-analytics"
+                ><li>Site Wide Custom Tags</li></a
+              >
+
+              <div class="tf-mega-menu-items" data-urlhead="#reporting">
+                <p>&nbsp;</p>
+                <p>
+                  <script>
+                    // <![CDATA[
+                    var test = "pass";
+                    // ]]>
+                  </script>
+                </p>
+              </div>
+
+              <li class="mobile-nav-title">&nbsp;</li>
+            </ul>
+
+            <li class="link mobile-nav-parent">
+              POS
+              <i class="icon icon-right-chevron pull-right"></i>
+            </li>
+            <ul class="mobile-nav-sub-list">
+              <li class="link main-menu-link">
+                <i class="icon icon-left-chevron x-space-s"></i>Main Menu
+              </li>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-shopping-basket icon-prefix"></i>Start An
+                Order
+              </li>
+
+              <a href="pos/order-entry?type=carryout"><li>Carry Out</li></a>
+
+              <a href="pos/order-entry?type=localdelivery"
+                ><li>Local Delivery</li></a
+              >
+
+              <a href="pos/order-entry?type=pickup"><li>Pick Up</li></a>
+
+              <a href="pos/order-entry?type=wirein"><li>Wire In</li></a>
+
+              <a href="pos/order-entry?type=wireout"><li>Wire Out</li></a>
+
+              <a href="pos/multi-order"><li>Multi-Order</li></a>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-search icon-prefix"></i>Lookups
+              </li>
+
+              <a href="epos/lookups/customers"><li>Customers</li></a>
+
+              <a href="epos/lookups/orders"><li>Orders</li></a>
+
+              <a href="epos/lookups/facilities"><li>Facilities</li></a>
+
+              <a href="epos/lookups/florists"><li>Florists</li></a>
+
+              <a href="epos/lookups/products"><li>Products</li></a>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-pie-chart icon-prefix"></i>Reports
+              </li>
+
+              <a href="epos/reports/business-pulse-report"
+                ><li>Business Pulse</li></a
+              >
+
+              <a href="epos/reports/delivery-report"><li>Delivery</li></a>
+
+              <a href="epos/reports/emv-transaction-history"
+                ><li>EMV Transaction History</li></a
+              >
+
+              <a href="epos/reports/orders-report"><li>Orders</li></a>
+
+              <a href="epos/reports/sales-by-product-report"
+                ><li>Sales by Product</li></a
+              >
+
+              <a href="epos/reports/sales-tax-report"><li>Sales Tax</li></a>
+
+              <a href="epos/reports/transaction-report"
+                ><li>Transaction Report</li></a
+              >
+
+              <div class="tf-mega-menu-items" data-urlhead="pos">
+                <a href="pos"
+                  ><img
+                    src="/images/pos/dashboard-image.png"
+                    class="dashboardImage"
+                    alt="Dashboard Image"
+                    style="padding-top: 20px"
+                /></a>
+              </div>
+
+              <li class="mobile-nav-title">&nbsp;</li>
+            </ul>
+
+            <li class="link mobile-nav-parent">
+              More
+              <i class="icon icon-right-chevron pull-right"></i>
+            </li>
+            <ul class="mobile-nav-sub-list">
+              <li class="link main-menu-link">
+                <i class="icon icon-left-chevron x-space-s"></i>Main Menu
+              </li>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-cogs icon-prefix"></i>Settings
+              </li>
+
+              <a href="#more/checkout-configuration"
+                ><li>Checkout Configuration</li></a
+              >
+
+              <a href="#more/customer-accounts"><li>Customer Accounts</li></a>
+
+              <a href="#more/esat-administration"
+                ><li>eSAT Administration</li></a
+              >
+
+              <a href="eweb/more/employee-permissions"
+                ><li>Employee Permissions</li></a
+              >
+
+              <a href="#more/general-settings"><li>General Settings</li></a>
+
+              <a href="#more/manage-search-terms"
+                ><li>Search Term Management</li></a
+              >
+
+              <a href="#more/site-navigation"><li>Site Navigation</li></a>
+
+              <a href="#more/admin-site-settings"
+                ><li>Admin Site Settings</li></a
+              >
+
+              <a href="#more/change-parent"><li>Change Parent</li></a>
+
+              <a href="#more/change-teleflora-id"
+                ><li>Change Teleflora ID</li></a
+              >
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-cube icon-prefix"></i>Delivery
+              </li>
+
+              <a href="#more/delivery-days-times"
+                ><li>Delivery Days &amp; Times</li></a
+              >
+
+              <a href="#more/manage-delivery-fees"
+                ><li>Delivery Fee Management</li></a
+              >
+
+              <a href="#more/drop-shipping-setup"
+                ><li>Drop Shipping Setup</li></a
+              >
+
+              <a href="#more/manage-delivery-matrix"
+                ><li>Delivery Matrix Management</li></a
+              >
+
+              <a href="#more/orders-exceptions"><li>Order Blocks</li></a>
+
+              <a href="#more/location-areas"><li>Location Areas</li></a>
+
+              <a href="#more/store-locations"><li>Store Locations</li></a>
+
+              <li class="mobile-nav-title">
+                <i class="icon icon-image icon-prefix"></i>Site Design
+              </li>
+
+              <a href="#more/image-management"><li>Image Management</li></a>
+
+              <a href="#more/image-profiles"><li>Image Profiles</li></a>
+
+              <a href="#more/site-theme"><li>Site Theme</li></a>
+
+              <a href="eweb/more/site-footer-management"
+                ><li>Site Footer Manager</li></a
+              >
+
+              <div class="tf-mega-menu-items" data-urlhead="#more">
+                <ul class="nav-links">
+                  <li style="text-align: left">
+                    <a href="#moreappay-faq">Apple Pay - FAQ's</a>
+                  </li>
+                  <li style="text-align: left">
+                    <a href="#moreppf-faq">PayPal Fast - FAQ's</a>
+                  </li>
+                  <li style="text-align: left">
+                    <a href="#moregpay-faq">Google Pay - FAQ's</a>
+                  </li>
+                  <li style="text-align: left">
+                    <a href="#morepaze-faq">Paze - FAQ's</a>
+                  </li>
+                </ul>
+              </div>
+
+              <li class="mobile-nav-title">&nbsp;</li>
+            </ul>
+
+            <li class="mobile-nav-title">Customer Service</li>
+
+            <a href="#help"><li>HELP</li></a>
+
+            <a href="#"><li>E-Mail Us</li></a>
+            <a href="#"><li>800-835-3356</li></a>
+            <li class="clearfix center-align">
+              <div class="centered-content-container">
+                <div class="col-2">
+                  <button
+                    class="icon icon-btn icon-pinterest icon-2x icon-colored"
+                  ></button>
+                </div>
+                <div class="col-2">
+                  <button
+                    class="icon icon-btn icon-facebook icon-2x icon-colored"
+                  ></button>
+                </div>
+                <div class="col-2">
+                  <button
+                    class="icon icon-btn icon-twitter icon-2x icon-colored"
+                  ></button>
+                </div>
+                <div class="col-2">
+                  <button
+                    class="icon icon-btn icon-instagram icon-2x icon-colored"
+                  ></button>
+                </div>
+                <div class="col-2">
+                  <button
+                    class="icon icon-btn icon-yelp icon-2x icon-colored"
+                  ></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--
+            Overlay that covers the visible content when mobile nav is open
+            If this is clicked, it will close the mobile nav
+        -->
+      <div id="mobile-nav-overlay" class="no-desktop-pos"></div>
+      <!-- Header and content -->
+      <div id="page-content">
+        <header id="header">
+          <div class="container">
+            <div id="header-container" class="row" data-tfid="00001014">
+              <div>
+                <div class="col-12">
+                  <div
+                    id="mobile-hamburger-menu"
+                    class="pull-left x-space-s no-desktop-pos"
+                  >
+                    <button
+                      id="nav-btn"
+                      class="icon icon-btn icon-nav icon-3x y-space-s"
+                    ></button>
+                  </div>
+                  <div class="logo pull-left">
+                    <a href="#home">
+                      <!-- TFT-22449 Changing logo in lookup page for Esat -->
+                      <span class="logo-sat">
+                        <img src="/images/Teleflora_esatlogo.png" class="" />
+                      </span>
+                    </a>
+                    <span id="shop-name-title" class="no-click logo-shop-name"
+                      >00001014 - Madison's More Awesome Shop</span
+                    >
+                    <a
+                      class="header-production-url hide"
+                      target="_blank"
+                      href="http://00001014.preview.telefloristonline.com"
+                      >00001014.preview.telefloristonline.com</a
+                    >
+                  </div>
+                  <i
+                    class="icon icon-user no-desktop mobile-user"
+                    id="mobile_user_profile_links"
+                  ></i>
+                  <div class="btn-panel no-mobile ipad-links">
+                    <a class="seeItLive" target="_blank">
+                      <button id="seeItLive" class="btn-clear">
+                        <i class="icon icon-comments"></i> See It Live
+                      </button>
+                    </a>
+                    <button id="ask-expert-btn" class="btn-clear">
+                      <i class="icon icon-comments"></i> Change Site
+                    </button>
+
+                    <button class="btn-clear logout">
+                      <i class="icon icon-user"></i> Log Out
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Desktop navigation container-->
+            <nav id="main-nav" class="row no-mobile-pos">
+              <div>
+                <div>
+                  <span class="nav-group">
+                    <div id="merchandising" class="nav-title">
+                      Merchandising
+                    </div>
+
+                    <div class="nav-body">
+                      <div class="clearfix">
+                        <div class="clearfix">
+                          <div class="col-12">
+                            <div class="nav-title-row clearfix">
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-home icon-prefix"></i
+                                  >Homepage
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-site-map icon-prefix"></i
+                                  >Categories
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-leaf icon-prefix"></i
+                                  >Products
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title"></div>
+                              </div>
+
+                              <div class="col-3 no-padding pull-right">
+                                <div class="nav-sub-title">
+                                  <i
+                                    class="icon icon-question-circle icon-prefix"
+                                  ></i>
+                                  Did You Know?
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a
+                                    href="#merchandising/homepage-customization"
+                                    >Homepage Customization</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/homepage-settings"
+                                    >Homepage Settings</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/products-messaging"
+                                    >Products &amp; Messaging</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#merchandising/manage-categories"
+                                    >Category Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/category-settings"
+                                    >Category Settings</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/collections"
+                                    >Collections</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/sympathy-page"
+                                    >Sympathy Page</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#merchandising/add-ons">Add-Ons</a>
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/deal-of-the-day"
+                                    >Deal of the Day</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#merchandising/general-product-settings"
+                                    >General Product Settings</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/merchandising-icons"
+                                    >Merchandising Icons</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/product-attributes"
+                                    >Product Attributes</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="eweb/merchandising/product-types"
+                                    >Product Types</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/product-management"
+                                    >Product Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#merchandising/product-page-settings"
+                                    >Product Page Settings</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#merchandising/subscription-product-setup"
+                                    >Subscription Products</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#merchandising/third-party-products-catalog"
+                                    >Third Party Product Catalogs</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div
+                              class="col-3 no-padding tf-mega-menu-items pull-right"
+                              data-urlhead="#merchandising"
+                            >
+                              <p style="text-align: left">
+                                <span style="font-size: 14pt"
+                                  >You can search by Keepsake container.</span
+                                >
+                              </p>
+                              <p style="text-align: left">
+                                <span style="font-size: 11pt"
+                                  >Just turn on the 'Keepsake Container Search'
+                                  <br />in the product search
+                                  filters.&nbsp;&nbsp;</span
+                                >
+                              </p>
+                              <p>
+                                <script>
+                                  // <![CDATA[
+                                  $(document).ready(function () {
+                                    $("#content").css("paddingTop", "100px");
+                                    $("head").append(
+                                      "<style>.img-grid-inner{ height: 10em; }#product-container #loader-overlay{z-index:4!important;}#product-container #spinner-gif{z-index:4!important;}@media only screen and (max-width: 960px).fa-question-circle.icon-large-3x, icon-large-3x.icon-question-circle{ font-size: 5em; }</style>"
+                                    );
+                                  });
+                                  // ]]>
+                                </script>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+
+                  <span class="nav-group">
+                    <div id="content-management" class="nav-title">
+                      Content Management
+                    </div>
+
+                    <div class="nav-body">
+                      <div class="clearfix">
+                        <div class="clearfix">
+                          <div class="col-12">
+                            <div class="nav-title-row clearfix">
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-list-ul icon-prefix"></i
+                                  >Custom Pages
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-grid icon-prefix"></i
+                                  >Additional Content
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-heart icon-prefix"></i
+                                  >Wedding Pages
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title"></div>
+                              </div>
+
+                              <div class="col-3 no-padding pull-right">
+                                <div class="nav-sub-title">
+                                  <i
+                                    class="icon icon-question-circle icon-prefix"
+                                  ></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#content-management/about-us"
+                                    >About Us</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/blog">Blog</a>
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#content-management/custom-html-pages"
+                                    >Custom HTML pages</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/help"
+                                    >Help Page</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a
+                                    href="#content-management/checkout-messaging-management"
+                                    >Checkout Messaging</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/custom-forms"
+                                    >Custom Forms</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/modal-management"
+                                    >Modal Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/obituary-list"
+                                    >Obituary List</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#content-management/social-media-setup"
+                                    >Social Media Setup</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#content-management/product-outgoing-message"
+                                    >Outgoing Product Messages</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#content-management/wedding-flowers"
+                                    >Flowers Page</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/wedding-gallery"
+                                    >Galleries</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/wedding-page"
+                                    >Landing Page</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#content-management/wedding-product"
+                                    >Products Page</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div
+                              class="col-3 no-padding tf-mega-menu-items pull-right"
+                              data-urlhead="#content-management"
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+
+                  <span class="nav-group">
+                    <div id="marketing-promotions" class="nav-title">
+                      Marketing &amp; Promotions
+                    </div>
+
+                    <div class="nav-body">
+                      <div class="clearfix">
+                        <div class="clearfix">
+                          <div class="col-12">
+                            <div class="nav-title-row clearfix">
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-email icon-prefix"></i
+                                  >Emails
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-money icon-prefix"></i
+                                  >Marketing
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-search icon-prefix"></i
+                                  >Seo
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title"></div>
+                              </div>
+
+                              <div class="col-3 no-padding pull-right">
+                                <div class="nav-sub-title">
+                                  <i
+                                    class="icon icon-question-circle icon-prefix"
+                                  ></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/email-list-management"
+                                    >Email List Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#marketing-promotions/email-settings"
+                                    >Email Settings</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/manage-marketing-emails"
+                                    >Marketing Email Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/custom-email-program"
+                                    >Custom Email Program</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/bonus-bloom-program"
+                                    >Bonus Bloom Program</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/marketing-campaigns"
+                                    >Marketing Campaigns</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/promotion-codes"
+                                    >Promotion Codes</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/review-management"
+                                    >Review Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="eweb/marketing-promotions/website-chat-widget"
+                                    >Website Chat Widget</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#marketing-promotions/manage-rewards"
+                                    >Rewards Program</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#marketing-promotions/manage-ckey"
+                                    >Simplified Ordering</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#marketing-promotions/about-us"
+                                    >About Us Page</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/footer-management"
+                                    >Footer Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#marketing-promotions/site-map"
+                                    >Site Map</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#marketing-promotions/site-meta-tags"
+                                    >Site Meta Tags</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a
+                                    href="#marketing-promotions/social-media-setup"
+                                    >Social Media Setup</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#marketing-promotions/url-management"
+                                    >URL Management</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div
+                              class="col-3 no-padding tf-mega-menu-items pull-right"
+                              data-urlhead="#marketing-promotions"
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+
+                  <span class="nav-group">
+                    <div id="reporting" class="nav-title">Reporting</div>
+
+                    <div class="nav-body">
+                      <div class="clearfix">
+                        <div class="clearfix">
+                          <div class="col-12">
+                            <div class="nav-title-row clearfix">
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-bar-chart icon-prefix"></i
+                                  >Site Performance
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i
+                                    class="icon icon-line-chart icon-prefix"
+                                  ></i
+                                  >Other Reports
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-analytics icon-prefix"></i
+                                  >Reporting Admin
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title"></div>
+                              </div>
+
+                              <div class="col-3 no-padding pull-right">
+                                <div class="nav-sub-title">
+                                  <i
+                                    class="icon icon-question-circle icon-prefix"
+                                  ></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#reporting/dashboard">Dashboard</a>
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/find-a-florist"
+                                    >Find A Florist</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/orders-traffic"
+                                    >Orders &amp; Traffic</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/promo-codes"
+                                    >Promotion Codes</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/source-codes"
+                                    >Source Codes</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/top-products"
+                                    >Top Products</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/top-referrals"
+                                    >Top Referrals</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#reporting/email-campaign"
+                                    >Email Campaigns</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/online-search"
+                                    >Online Search Marketing</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/order-lookup"
+                                    >Order Lookup</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/refunds-lookup"
+                                    >Refunds Lookup</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/search-optimizer"
+                                    >Search Optimizer</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#reporting/esat-audit-log"
+                                    >eSAT Audit Log</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#reporting/google-analytics"
+                                    >Site Wide Custom Tags</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div
+                              class="col-3 no-padding tf-mega-menu-items pull-right"
+                              data-urlhead="#reporting"
+                            >
+                              <p>&nbsp;</p>
+                              <p>
+                                <script>
+                                  // <![CDATA[
+                                  var test = "pass";
+                                  // ]]>
+                                </script>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+
+                  <span class="nav-group">
+                    <div id="pos" class="nav-title">POS</div>
+
+                    <div class="nav-body">
+                      <div class="clearfix">
+                        <div class="clearfix">
+                          <div class="col-12">
+                            <div class="nav-title-row clearfix">
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i
+                                    class="icon icon-shopping-basket icon-prefix"
+                                  ></i
+                                  >Start An Order
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-search icon-prefix"></i
+                                  >Lookups
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-pie-chart icon-prefix"></i
+                                  >Reports
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="pos/order-entry?type=carryout"
+                                    >Carry Out</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="pos/order-entry?type=localdelivery"
+                                    >Local Delivery</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="pos/order-entry?type=pickup"
+                                    >Pick Up</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="pos/order-entry?type=wirein"
+                                    >Wire In</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="pos/order-entry?type=wireout"
+                                    >Wire Out</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="pos/multi-order">Multi-Order</a>
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="epos/lookups/customers">Customers</a>
+                                </li>
+
+                                <li>
+                                  <a href="epos/lookups/orders">Orders</a>
+                                </li>
+
+                                <li>
+                                  <a href="epos/lookups/facilities"
+                                    >Facilities</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="epos/lookups/florists">Florists</a>
+                                </li>
+
+                                <li>
+                                  <a href="epos/lookups/products">Products</a>
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="epos/reports/business-pulse-report"
+                                    >Business Pulse</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="epos/reports/delivery-report"
+                                    >Delivery</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="epos/reports/emv-transaction-history"
+                                    >EMV Transaction History</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="epos/reports/orders-report"
+                                    >Orders</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="epos/reports/sales-by-product-report"
+                                    >Sales by Product</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="epos/reports/sales-tax-report"
+                                    >Sales Tax</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="epos/reports/transaction-report"
+                                    >Transaction Report</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div
+                              class="col-3 no-padding tf-mega-menu-items pull-right"
+                              data-urlhead="pos"
+                            >
+                              <a href="pos"
+                                ><img
+                                  src="/images/pos/dashboard-image.png"
+                                  class="dashboardImage"
+                                  alt="Dashboard Image"
+                                  style="padding-top: 20px"
+                              /></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+
+                  <span class="nav-group">
+                    <div id="more" class="nav-title">More</div>
+
+                    <div class="nav-body">
+                      <div class="clearfix">
+                        <div class="clearfix">
+                          <div class="col-12">
+                            <div class="nav-title-row clearfix">
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-cogs icon-prefix"></i
+                                  >Settings
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-cube icon-prefix"></i
+                                  >Delivery
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title">
+                                  <i class="icon icon-image icon-prefix"></i
+                                  >Site Design
+                                </div>
+                              </div>
+
+                              <div class="col-3 no-padding">
+                                <div class="nav-sub-title"></div>
+                              </div>
+
+                              <div class="col-3 no-padding pull-right">
+                                <div class="nav-sub-title">
+                                  <i
+                                    class="icon icon-question-circle icon-prefix"
+                                  ></i>
+                                  Web Payment FAQ's
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#more/checkout-configuration"
+                                    >Checkout Configuration</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/customer-accounts"
+                                    >Customer Accounts</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/esat-administration"
+                                    >eSAT Administration</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="eweb/more/employee-permissions"
+                                    >Employee Permissions</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/general-settings"
+                                    >General Settings</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/manage-search-terms"
+                                    >Search Term Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/site-navigation"
+                                    >Site Navigation</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/admin-site-settings"
+                                    >Admin Site Settings</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/change-parent"
+                                    >Change Parent</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/change-teleflora-id"
+                                    >Change Teleflora ID</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#more/delivery-days-times"
+                                    >Delivery Days &amp; Times</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/manage-delivery-fees"
+                                    >Delivery Fee Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/drop-shipping-setup"
+                                    >Drop Shipping Setup</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/manage-delivery-matrix"
+                                    >Delivery Matrix Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/orders-exceptions"
+                                    >Order Blocks</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/location-areas"
+                                    >Location Areas</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/store-locations"
+                                    >Store Locations</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="col-3 no-padding">
+                              <ul class="nav-links">
+                                <li>
+                                  <a href="#more/image-management"
+                                    >Image Management</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/image-profiles"
+                                    >Image Profiles</a
+                                  >
+                                </li>
+
+                                <li>
+                                  <a href="#more/site-theme">Site Theme</a>
+                                </li>
+
+                                <li>
+                                  <a href="eweb/more/site-footer-management"
+                                    >Site Footer Manager</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div
+                              class="col-3 no-padding tf-mega-menu-items pull-right"
+                              data-urlhead="#more"
+                            >
+                              <ul class="nav-links">
+                                <li style="text-align: left">
+                                  <a href="#moreappay-faq">Apple Pay - FAQ's</a>
+                                </li>
+                                <li style="text-align: left">
+                                  <a href="#moreppf-faq">PayPal Fast - FAQ's</a>
+                                </li>
+                                <li style="text-align: left">
+                                  <a href="#moregpay-faq">Google Pay - FAQ's</a>
+                                </li>
+                                <li style="text-align: left">
+                                  <a href="#morepaze-faq">Paze - FAQ's</a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+
+                  <span class="nav-group help-group">
+                    <div id="help" class="nav-title">Help</div>
+                  </span>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </header>
+        <!-- Page content (this is what routing affects -->
+        <section id="content" class="container" style="padding-top: 100px">
+          <div>
+            <p></p>
+            <p></p>
+            <main class="city-page-form">
+              <h1>City Page Request Form</h1>
+              <form>
+                <section class="city-form-section contact-info">
+                  <h2>Contact Information</h2>
+                  <div>
+                    <label>Shop Name</label>
+                    <input
+                      type="text"
+                      value=""
+                      name="shop-name"
+                      required=""
+                      class="border rounded"
+                      id="shopNameInput"
+                    />
+                  </div>
+                  <div>
+                    <label>Teleflora ID</label>
+                    <input
+                      type="text"
+                      value=""
+                      name="shop-id"
+                      required=""
+                      id="telefloraIDInput"
+                    />
+                  </div>
+                  <div>
+                    <label>Contact Name</label>
+                    <input
+                      type="text"
+                      value=""
+                      name="contact-name"
+                      required=""
+                    />
+                  </div>
+                  <div>
+                    <label>Contact Phone Number</label>
+                    <input
+                      type="phone"
+                      value=""
+                      name="contact-phone"
+                      required=""
+                    />
+                  </div>
+                  <div>
+                    <label>Contact Email</label>
+                    <input
+                      type="text"
+                      value=""
+                      name="contact-email"
+                      required=""
+                    />
+                  </div>
+                </section>
+                <section class="city-form-section city-page-info hidden">
+                  <div>
+                    <h2>City Page Information</h2>
+                    <label>City and State</label>
+                    <input
+                      type="text"
+                      value="Oklahoma City, OK"
+                      name="city-state"
+                      required=""
+                    />
+                  </div>
+                  <div>
+                    <p>What delivery options are available in your city?</p>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Same day delivery"
+                        name="delivery-options"
+                        id="sameDay"
+                      />
+                      <label for="sameDay">Same Day Delivery</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Next day delivery"
+                        name="delivery-options"
+                        id="nextDay"
+                      />
+                      <label for="nextDay">Next Day Delivery</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="I do not deliver here"
+                        name="delivery-options"
+                        id="noDelivery"
+                      />
+                      <label for="noDelivery">I do not deliver here</label>
+                    </div>
+                  </div>
+                  <div>
+                    <p>
+                      Is there any delivery information specific to this city?
+                    </p>
+                    <input
+                      type="text"
+                      value=""
+                      placeholder=""
+                      name="delivery-information"
+                    />
+                  </div>
+                  <div>
+                    <p>What special services do you provide to this city?</p>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Gift Basket Delivery"
+                        name="city-services"
+                        id="giftBaskets"
+                      />
+                      <label for="giftBaskets">Gift Basket Delivery</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Same Day Plant Delivery"
+                        name="city-services"
+                        id="plantDelivery"
+                      />
+                      <label for="plantDelivery">Same Day Plant Delivery</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Wedding Flower Services"
+                        name="city-services"
+                        id="weddingServices"
+                      />
+                      <label for="weddingServices"
+                        >Wedding Flower Services</label
+                      >
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="corporate events"
+                        name="city-services"
+                        id="corpoEvents"
+                      />
+                      <label for="corpoEvents">Corporate Events</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Funeral Flower Services"
+                        name="city-services"
+                        id="funeralFlowers"
+                      />
+                      <label for="funeralFlowers">Funeral Flowers</label>
+                    </div>
+                    <div class="checkbox-wrapper checkbox-inline">
+                      <input
+                        type="checkbox"
+                        value="Other"
+                        name="city-services"
+                        id="otherServices"
+                      />
+                      <label for="otherServices">Other: </label>
+                      <input
+                        type="text"
+                        value=""
+                        name="other-city-services"
+                        id="otherServicesText"
+                        class="hidden"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label>How long have you been serving this area?</label>
+                    <input type="text" value="" name="service-duration" />
+                  </div>
+                  <div>
+                    <label
+                      >What tourist attractions, shopping, or historical
+                      districts are popular in this city?&lt;/label &gt;
+                      <input type="text" value="" name="city-attractions" />
+                    </label>
+                  </div>
+                  <div>
+                    <label
+                      >What Zip Codes or Neighborhoods are include in this
+                      area?&lt;/label &gt;
+                      <input
+                        type="text"
+                        value=""
+                        name="city-zips-and-neighborhoods"
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label
+                      >Are there any special holidays or events in this area
+                      that incorporate flowers?&lt;/label &gt;
+                      <input type="text" value="" name="special-holidays" />
+                    </label>
+                  </div>
+                  <div>
+                    <label
+                      >What's something unique about your service or shop you
+                      want people in this area to know?&lt;/label &gt;
+                      <input type="text" value="" name="unique" />
+                    </label>
+                  </div>
+                  <div>
+                    <label
+                      >Is there anything else you would like customers in this
+                      city to know?&lt;/label &gt;
+                      <input type="text" value="" name="additional-info" />
+                    </label>
+                  </div>
+                  <div>
+                    <p>How would you describe your floral style?</p>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Rustic"
+                        name="floral-style"
+                        id="rustic"
+                      />
+                      <label for="rustic">Rustic</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Classic"
+                        name="floral-style"
+                        id="classic"
+                      />
+                      <label for="classic">Classic</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Value"
+                        name="floral-style"
+                        id="value"
+                      />
+                      <label for="value">Value</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Luxury"
+                        name="floral-style"
+                        id="luxury"
+                      />
+                      <label for="luxury">Luxury</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="Bohemian"
+                        name="floral-style"
+                        id="bohemian"
+                      />
+                      <label for="bohemian">Bohemian</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="modern/sleek"
+                        name="floral-style"
+                        id="modern"
+                      />
+                      <label for="modern">Modern / Sleek</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        value="minimalist"
+                        name="floral-style"
+                        id="minimalist"
+                      />
+                      <label for="minimalist">Minimalist</label>
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      >Funeral Homes You Deliver to in this city (list
+                      2-3)</label
+                    >
+                    <input type="text" value="" name="funeral-homes" />
+                  </div>
+                  <div>
+                    <label
+                      >Hospitals You Deliver to in this city (list 2-3)</label
+                    >
+                    <input type="text" value="" name="hospitals" />
+                  </div>
+                  <div>
+                    <label
+                      >Schools You Deliver to in this city (list 2-3)</label
+                    >
+                    <input type="text" value="" name="schools" />
+                  </div>
+                  <div>
+                    <label
+                      >Wedding Venues You Deliver to in this city (list
+                      2-3)</label
+                    >
+                    <input type="text" value="" name="wedding-venues" />
+                  </div>
+                  <div>
+                    <label
+                      >Other Locations You Deliver to in this city (list
+                      2-3)</label
+                    >
+                    <input type="text" value="" name="other-locations" />
+                  </div>
+                </section>
+                <div class="city-form-buttons">
+                  <button type="button" class="back-button">Back</button>
+                  <button class="next-button">Next</button>
+                </div>
+              </form>
+              <script>
+                const form = document.querySelector("form");
+                const nextButton = document.querySelector(".next-button");
+                const otherCheck = document.getElementById("otherServices");
+                const formSections =
+                  document.querySelectorAll(".city-form-section");
+                console.log("Form sections length: ", formSections.length);
+                let index = 0;
+
+                otherCheck.addEventListener("click", () => {
+                  const otherTextInput =
+                    document.getElementById("otherServicesText");
+
+                  otherTextInput.classList.toggle("hidden");
+                });
+
+                function setFormValues() {
+                  const idAndTitle = document.getElementById("shop-name-title");
+                  const [telefloraId, shopName] = idAndTitle.textContent
+                    .replace(" ", "")
+                    .split("-");
+                  if (!telefloraId || !shopName) {
+                    console.error(
+                      "City Page Form: Failed to get default telefloraID and/or Shope Name"
+                    );
+                    return;
+                  }
+
+                  document.getElementById("telefloraIDInput").value =
+                    telefloraId;
+                  document.getElementById("shopNameInput").value = shopName;
+                }
+
+                setFormValues();
+
+                form.addEventListener("submit", async (e) => {
+                  e.preventDefault();
+
+                  // Submit form on last step
+                  if (index === formSections.length - 1) {
+                    const formData = new FormData(form);
+                    const data = {};
+
+                    for (const [key, value] of formData.entries()) {
+                      if (data[key]) {
+                        if (!Array.isArray(data[key])) {
+                          data[key] = [data[key]];
+                        }
+                        data[key].push(value);
+                      } else {
+                        data[key] = value;
+                      }
+                    }
+
+                    try {
+                      nextButton.textContent = "Loading...";
+                      const res = await fetch(
+                        "http://localhost:3000/proxy/openai",
+                        {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify(data),
+                        }
+                      );
+
+                      const result = await res.json();
+                      fetch(
+                        "https://assets.eflorist.com/rest/model/teleflora/esat/contentmanagement/CustomPageActor/saveOrUpdateCustomPage",
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          credentials: "include",
+                          body: JSON.stringify({
+                            customPageInfo: {
+                              pageName: "Test Page 123",
+                              pageUrl:
+                                "/" +
+                                data["city-state"]
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9]+/g, "-"),
+                              active: true,
+                              metaDesc: "",
+                              pageTitle: data["city-state"],
+                              metaKeywords: "",
+                              metaTags: "",
+                              useSiteWrapper: true,
+                              addToSitemap: true,
+                              pageMainContent: result,
+                              startDate: "07/30/2025",
+                              endDate: "",
+                              linkForm: false,
+                              selectedFormId: "",
+                              customFormList: [
+                                {
+                                  formId: "40200001",
+                                  emailResults: null,
+                                  pageMainContent: null,
+                                  captcha: false,
+                                  endDate: null,
+                                  customFormId: null,
+                                  formName: "This is a subject test",
+                                  active: false,
+                                  pageUrl: null,
+                                  fields: null,
+                                  class:
+                                    "com.teleflora.esat.customforms.ui.CustomFormInfo",
+                                  startDate: null,
+                                },
+                              ],
+                              class:
+                                "com.teleflora.esat.contentmanagement.ui.CustomPageInfo",
+                            },
+                            clickPageName: "Custom HTML pages",
+                          }),
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((data) => console.log("Success:", data))
+                        .catch((error) => console.error("Error:", error));
+                      nextButton.textContent = "Submit";
+                      alert(
+                        !result.error
+                          ? "Page created!"
+                          : "Failed to create page"
+                      );
+                    } catch (err) {
+                      console.error(err);
+                      alert("Something went wrong.");
+                    }
+
+                    return;
+                  }
+
+                  if (index === formSections.length - 2) {
+                    nextButton.textContent = "Submit";
+                  }
+
+                  formSections[index].classList.toggle("hidden");
+                  index++;
+                  formSections[index].classList.toggle("hidden");
+                });
+              </script>
+            </main>
+            <style>
+              .city-page-form * {
+                font-family: Avenir, Helvetica, Arial, sans-serif;
+              }
+              .checkbox-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+              }
+
+              .city-page-form form {
+                border: 1px solid #ccc;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15);
+              }
+
+              form input[type="phone"] {
+                border: 1px solid #bcbcbc;
+                border-radius: 3px;
+                font-size: 12px;
+                height: 3em;
+                margin: 10px 0;
+                padding: 10px;
+                width: 100%;
+              }
+              form p {
+                font-size: 1.1em;
+                font-weight: 700;
+              }
+
+              .city-form-buttons {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+              }
+              .city-form-buttons button {
+                padding: 7px 20px;
+                border-radius: 7px;
+                font-size: 1.2em;
+                border: 2px solid black;
+                background-color: white;
+                box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15);
+              }
+              .city-form-buttons .next-button {
+                background-color: black;
+                color: #fff;
+              }
+            </style>
+            <p></p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer id="footer" class="clearfix">
+      <div class="container">
+        <div class="pull-left">
+          Need Help? <span id="supportPhoneNumber">866.983.3932</span> |
+          <span id="supportEmail">eFlorist@teleflora.com</span>
+        </div>
+        <div class="pull-right" id="goToMyTf">
+          <img id="brandImage" src="/images/Teleflora.png" alt="" />
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript" id="" charset="">
+      $(document).ready(function () {
+        $(window).on("hashchange", function (a) {
+          -1 < window.location.href.indexOf("general-product-settings") &&
+            (console.log("general-product-settings"),
+            setTimeout(function () {
+              $("#page-content").find("#f-alwaysUsePricing").parent().remove();
+            }, 500));
+        });
+      });
+    </script>
+    <script
+      id=""
+      text=""
+      charset=""
+      type="text/javascript"
+      src="https://home-c6.incontact.com/inContact/ChatClient/js/embed.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="chrome-extension://keddjgbnllkiggdeobkpchbncclhfoad/script.js"
+    ></script>
+    <script type="text/javascript" id="" charset="">
+      icPatronChat.init({
+        serverHost: "https://home-c6.incontact.com",
+        bus_no: 4593075,
+        poc: "0faa4641-4ffb-45f9-a550-fe03d17b96c5",
+        params: ["FirstName", "Last Name", "first.last@company.com", -5555],
+      });
+    </script>
+    <div class="ie-div-position-customer-chat">
+      <div id="chat-div-wrap" class="chat-iframe-wrap" style="width: 0px">
+        <iframe
+          src="https://home-c6.incontact.com/inContact/ChatClient/ChatClient.aspx?poc=0faa4641-4ffb-45f9-a550-fe03d17b96c5&amp;bu=4593075"
+          id="icChat"
+          name="icChat"
+          title="Chat Window"
+          scrolling="no"
+          class="ie-iframe-fixed-customer-chat"
+          height="0"
+          width="0"
+          style="border-style: none"
+          tabindex="-1"
+        ></iframe>
+      </div>
+      <div class="button-iframe-wrap">
+        <iframe
+          src="https://home-c6.incontact.com/inContact/ChatClient/chatButton.html"
+          id="icChatButton"
+          name="icChatButton"
+          scrolling="no"
+          height="80"
+          width="180"
+          class="ie-chat-button-iframe-fixed-customer-chat"
+          style="border-style: none"
+        ></iframe>
+      </div>
+    </div>
+    <div
+      tabindex="-1"
+      role="dialog"
+      class="ui-dialog confirmModal ui-corner-all ui-widget ui-widget-content ui-front ui-resizable"
+      aria-describedby="modal-container"
+      aria-labelledby="ui-id-1"
+      style="display: none; position: absolute; z-index: 22"
+    >
+      <div
+        class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"
+      >
+        <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span
+        ><button
+          type="button"
+          class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close"
+          title="Close"
+        >
+          <span class="ui-button-icon ui-icon ui-icon-closethick"></span
+          ><span class="ui-button-icon-space"> </span>Close
+        </button>
+      </div>
+      <div
+        id="modal-container"
+        class="ui-dialog-content ui-widget-content"
+      ></div>
+      <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90"></div>
+      <div
+        class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-sw"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-ne"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-nw"
+        style="z-index: 90"
+      ></div>
+    </div>
+    <div
+      tabindex="-1"
+      role="dialog"
+      class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-resizable"
+      aria-describedby="another-modal-container"
+      aria-labelledby="ui-id-2"
+      style="display: none; position: absolute"
+    >
+      <div
+        class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"
+      >
+        <span id="ui-id-2" class="ui-dialog-title">&nbsp;</span
+        ><button
+          type="button"
+          class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close"
+          title="Close"
+        >
+          <span class="ui-button-icon ui-icon ui-icon-closethick"></span
+          ><span class="ui-button-icon-space"> </span>Close
+        </button>
+      </div>
+      <div
+        id="another-modal-container"
+        class="ui-dialog-content ui-widget-content"
+      ></div>
+      <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90"></div>
+      <div
+        class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-sw"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-ne"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-nw"
+        style="z-index: 90"
+      ></div>
+    </div>
+    <div
+      tabindex="-1"
+      role="dialog"
+      class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-resizable"
+      aria-describedby="modal-container-form"
+      aria-labelledby="ui-id-3"
+      style="
+        position: absolute;
+        height: auto;
+        width: 700px;
+        top: 487px;
+        left: 536px;
+        display: none;
+      "
+    >
+      <div
+        class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"
+      >
+        <span id="ui-id-3" class="ui-dialog-title">&nbsp;</span
+        ><button
+          type="button"
+          class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close"
+          title="Close"
+        >
+          <span class="ui-button-icon ui-icon ui-icon-closethick"></span
+          ><span class="ui-button-icon-space"> </span>Close
+        </button>
+      </div>
+      <div
+        id="modal-container-form"
+        class="ui-dialog-content ui-widget-content"
+        style="width: auto; min-height: 150px; max-height: none; height: auto"
+      ></div>
+      <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90"></div>
+      <div
+        class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-sw"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-ne"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-nw"
+        style="z-index: 90"
+      ></div>
+    </div>
+    <div
+      tabindex="-1"
+      role="dialog"
+      class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-resizable"
+      aria-describedby="modal-container-fixed"
+      aria-labelledby="ui-id-4"
+      style="display: none; position: absolute"
+    >
+      <div
+        class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"
+      >
+        <span id="ui-id-4" class="ui-dialog-title">&nbsp;</span
+        ><button
+          type="button"
+          class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close"
+          title="Close"
+        >
+          <span class="ui-button-icon ui-icon ui-icon-closethick"></span
+          ><span class="ui-button-icon-space"> </span>Close
+        </button>
+      </div>
+      <div
+        id="modal-container-fixed"
+        class="ui-dialog-content ui-widget-content"
+      ></div>
+      <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90"></div>
+      <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90"></div>
+      <div
+        class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-sw"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-ne"
+        style="z-index: 90"
+      ></div>
+      <div
+        class="ui-resizable-handle ui-resizable-nw"
+        style="z-index: 90"
+      ></div>
+    </div>
+    <script type="text/javascript" id="" charset="">
+      dataLayer.push({ event: "pageview" });
+    </script>
+  </body>
+</html>
