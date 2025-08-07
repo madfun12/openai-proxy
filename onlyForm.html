@@ -51,9 +51,8 @@
             <label>City and State</label>
             <input
               type="text"
-              value="Oklahoma City, OK"
+              value=""
               name="city-state"
-              required=""
             />
           </div>
           <div>
@@ -166,35 +165,33 @@
           <div>
             <label
               >What tourist attractions, shopping, or historical districts are
-              popular in this city?&lt;/label &gt;
+              popular in this city?</label>
               <input type="text" value="" name="city-attractions" />
-            </label>
+           
           </div>
           <div>
             <label
               >What Zip Codes or Neighborhoods are include in this
-              area?&lt;/label &gt;
+              area?</label>
               <input type="text" value="" name="city-zips-and-neighborhoods" />
-            </label>
+            
           </div>
           <div>
             <label
               >Are there any special holidays or events in this area that
-              incorporate flowers?&lt;/label &gt;
+              incorporate flowers?</label>
               <input type="text" value="" name="special-holidays" />
-            </label>
+            
           </div>
           <div>
             <label
               >What's something unique about your service or shop you want
-              people in this area to know?&lt;/label &gt;
+              people in this area to know?</label>
               <input type="text" value="" name="unique" />
-            </label>
+            
           </div>
           <div>
-            <label
-              >Is there anything else you would like customers in this city to
-              know?&lt;/label &gt;
+            <label>Is there anything else you would like customers in this city to know?</label>
               <input type="text" value="" name="additional-info" />
             </label>
           </div>
@@ -281,9 +278,7 @@
             <input type="text" value="" name="wedding-venues" />
           </div>
           <div>
-            <label
-              >Other Locations You Deliver to in this city (list 2-3)</label
-            >
+            <label>Other Locations You Deliver to in this city (list 2-3)</label>
             <input type="text" value="" name="other-locations" />
           </div>
         </section>
@@ -312,7 +307,9 @@
           // Submit form on last step
           if (index === formSections.length - 1) {
             const idAndTitle = document.getElementById("shop-name-title");
-            const [telefloraId, shopName] = idAndTitle.textContent.split("-");
+            const [telefloraId, shopName] = idAndTitle.textContent
+              .split("-")
+              .map(s => s.trim());
             const formData = new FormData(cityPageForm);
             const data = {};
 
@@ -330,13 +327,14 @@
             try {
               nextButton.textContent = "Loading...";
               const res = await fetch(
-                "https://openai-proxy-244535243783.us-central1.run.app",
+                "https://openai-proxy-244535243783.us-central1.run.app/proxy/openai",
                 {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
                     "shop-name": shopName,
                     ...data,
+                    "map-src": `https://www.google.com/maps?q=${encodeURIComponent(data["city-state"])}&output=embed`
                   }),
                 }
               );
@@ -399,11 +397,16 @@
               nextButton.textContent = "Submit";
               console.log(eSATResponse);
               const error =
-                eSATResponse.exception.formExceptions[0].localizedMessage;
+                eSATResponse.exception?.formExceptions?.[0]?.localizedMessage;
               if (error) {
                 alert(`Failed to create page!: ${error}`);
                 throw new Error(error);
               }
+
+              // Go back to beginning
+              formSections[index].classList.toggle("hidden");
+              index = 0;
+              formSections[index].classList.toggle("hidden");
               alert(
                 `Successfully created page!: https://${telefloraId}.preview.telefloristonline.com${pageSlug}`
               );

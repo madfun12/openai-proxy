@@ -7,6 +7,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 router.post("/", async (req, res) => {
   const client = new OpenAI();
+  console.log("Request received");
   try {
     const body = await req.body;
 
@@ -173,7 +174,7 @@ router.post("/", async (req, res) => {
     `,
     });
 
-    console.log("Response from OpenAI: ", response.output_text);
+    console.log("Successfully sent response");
     res.status(200).json(response.output_text);
   } catch (error) {
     console.error(
