@@ -329,14 +329,17 @@
 
             try {
               nextButton.textContent = "Loading...";
-              const res = await fetch("http://localhost:3000/proxy/openai", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  "shop-name": shopName,
-                  ...data,
-                }),
-              });
+              const res = await fetch(
+                "https://openai-proxy-244535243783.us-central1.run.app",
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    "shop-name": shopName,
+                    ...data,
+                  }),
+                }
+              );
 
               const result = await res.json();
               console.log(result);

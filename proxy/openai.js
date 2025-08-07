@@ -44,9 +44,14 @@ router.post("/", async (req, res) => {
         <section class="city-page-google-map-container">
             <div class="city-page-google-map-wrapper">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3247.90319289516!2d-97.5851058!3d35.50667189999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b21a9eafa617af%3A0xfea624ecf83116c1!2sTeleflora!5e0!3m2!1sen!2sus!4v1754056223016!5m2!1sen!2sus"
-                    width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    width="600"
+                    height="450"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps?q=/* CITY NAME HERE */&output=embed">
+                </iframe>
             </div>
         </section>
 
